@@ -27,7 +27,7 @@ setup(
     package_dir={'galaxy_updater':
                  'galaxy_updater'},
     include_package_data=True,
-    install_requires=['pyyaml'],
+    install_requires=['pyyaml', 'future'],
     license="BSD",
     keywords='ansible-galaxy ansible galaxy requirements.yml',
     classifiers=[

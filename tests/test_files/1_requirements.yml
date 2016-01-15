@@ -11,3 +11,7 @@
 - src: file://tests/test_sources/ansible-role-php.out
   name: ansible-role-php
   version: 0.0.1
+- src: file://tests/test_sources/ansible-role-1-tag.out
+  version: 0.0.1
+- src: file://tests/test_sources/ansible-role-0-tag.out
+  version: 0.0.1

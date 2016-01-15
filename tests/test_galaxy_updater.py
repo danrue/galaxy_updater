@@ -17,7 +17,7 @@ class TestGalaxy_updater(object):
     def test_000_something(self):
         u = galaxy_updater.updater("tests/test_files/1_requirements.yml")
         output = u.find_latest_versions()
-        assert len(output) == 4
+        assert len(output) == 5
 
 
 if __name__ == '__main__':

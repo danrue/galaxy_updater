@@ -1,5 +1,5 @@
 from __future__ import print_function
-from builtins import object
+from builtins import object, str
 import argparse
 import os
 import re
@@ -25,7 +25,7 @@ class git_tags(object):
                   "Unsupported source type: {0}".format(src))
 
         self.tags = re.findall(r'refs/tags/([\d+.]+)$', 
-                    output.decode('utf-8'), re.MULTILINE)
+                    str(output), re.MULTILINE)
 
     def latest(self):
         return sorted(self.tags, key=LooseVersion)[-1]

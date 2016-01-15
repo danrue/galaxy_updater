@@ -48,7 +48,7 @@ setup(
 
     entry_points={
         'console_scripts': [
-            'galaxy_updater=galaxy_updater.galaxy_updater:main',
+            'galaxy-updater=galaxy_updater.galaxy_updater:main',
         ],
     },
 

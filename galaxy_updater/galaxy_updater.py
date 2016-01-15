@@ -24,7 +24,8 @@ class git_tags(object):
             raise UnsupportedSrcError(
                   "Unsupported source type: {0}".format(src))
 
-        self.tags = re.findall(r'refs/tags/([\d+.]+)$', output, re.MULTILINE)
+        self.tags = re.findall(r'refs/tags/([\d+.]+)$', 
+                    output.decode('utf-8'), re.MULTILINE)
 
     def latest(self):
         return sorted(self.tags, key=LooseVersion)[-1]

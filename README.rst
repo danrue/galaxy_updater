@@ -11,14 +11,14 @@ Galaxy Updater
 Installation
 ------------
 
-``pip install galaxy_updater``
+``pip install galaxy-updater``
 
 Usage
 -----
 
 Find the latest version of each role listed in an ansible-galaxy role file::
 
-    $ galaxy_updater sample_requirements.yml 
+    $ galaxy-updater sample_requirements.yml 
     ansible-role-mysql: 1.9.0 -> 1.9.1
     ansible-role-apache: None -> 1.5.0
     ansible-role-php: 1.5.0 -> 1.7.3

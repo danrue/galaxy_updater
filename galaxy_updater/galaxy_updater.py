@@ -24,15 +24,18 @@ class git_tags(object):
             raise UnsupportedSrcError(
                   "Unsupported source type: {0}".format(src))
 
-        self.tags = re.findall(r'refs/tags/([\d+.]+)$', 
-                    str(output), re.MULTILINE)
+        self.tags = re.findall(r'refs/tags/([\d\w\.]+)$', 
+                    output, re.MULTILINE)
 
     def latest(self):
+        if len(self.tags) < 1:
+            return None
         return sorted(self.tags, key=LooseVersion)[-1]
 
     def _get_tags_from_git(self, src):
         p = subprocess.Popen(["git", "ls-remote", src], 
-                             stdout=subprocess.PIPE)
+                             stdout=subprocess.PIPE,
+                             universal_newlines=True)
         return p.communicate()[0]
 
     def _get_tags_from_file(self, src):
@@ -53,6 +56,9 @@ class updater(object):
             short_name = src.split('/')[-1].split('.')[0]
             version = req.get('version')
             g = git_tags(src)
+
+            if not g.latest():
+                continue
 
             if ( (not version) or
                  (LooseVersion(version) < LooseVersion(g.latest())) ):

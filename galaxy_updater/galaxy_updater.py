@@ -47,7 +47,7 @@ class updater(object):
     def find_latest_versions(self):
         output = []
         for req in self.reqs:
-            assert req['src'], "Error, src key not found in {}".format(req)
+            assert req['src'], "Error, src key not found in {}".format(req) 
             src = req['src']
             short_name = src.split('/')[-1].split('.')[0]
             version = req.get('version')

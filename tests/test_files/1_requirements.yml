@@ -1,0 +1,13 @@
+---
+- src: file://tests/test_sources/ansible-role-mysql.out
+  name: ansible-role-mysql
+  version: 0.0.1
+- src: file://tests/test_sources/ansible-role-apache.out
+  name: ansible-role-apache
+  version: 0.0.1
+- src: file://tests/test_sources/ansible-role-jenkins.out
+  name: ansible-role-jenkins
+  version: 0.0.1
+- src: file://tests/test_sources/ansible-role-php.out
+  name: ansible-role-php
+  version: 0.0.1

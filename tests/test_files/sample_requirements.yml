@@ -1,0 +1,12 @@
+---
+- src: https://github.com/geerlingguy/ansible-role-mysql.git 
+  name: ansible-role-mysql
+  version: 1.9.0
+- src: https://github.com/geerlingguy/ansible-role-apache.git 
+  name: ansible-role-apache
+- src: https://github.com/geerlingguy/ansible-role-jenkins.git 
+  name: ansible-role-jenkins
+  version: 1.2.8
+- src: https://github.com/geerlingguy/ansible-role-php.git 
+  name: ansible-role-php
+  version: 1.5.0

@@ -7,12 +7,11 @@ test_galaxy_updater
 
 Tests for `galaxy_updater` module.
 """
-from builtins import object
 
 from galaxy_updater import galaxy_updater
 
 
-class TestGalaxy_updater(object):
+class TestGalaxy_updater:
 
     def test_000_something(self):
         u = galaxy_updater.updater("tests/test_files/1_requirements.yml")

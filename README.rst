@@ -8,8 +8,7 @@ Galaxy Updater
 .. image:: https://img.shields.io/travis/danrue/galaxy_updater.svg
         :target: https://travis-ci.org/danrue/galaxy_updater
 
-
-Retrieve the latest version tags for all of your ansible-galaxy requirements.
+Discover the latest versions of all of your ansible role dependencies.
 
 Installation
 ------------

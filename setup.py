@@ -15,8 +15,8 @@ with open('HISTORY.rst') as history_file:
 setup(
     name='galaxy-updater',
     version='0.0.1',
-    description=('Retrieve the latest version tags for all of your '
-                 'ansible-galaxy dependencies.'),
+    description=('Retrieve the latest versions for all of your '
+                 'ansible-galaxy role dependencies.'),
     long_description=readme + '\n\n' + history,
     author="Dan Rue",
     author_email='drue@therub.org',

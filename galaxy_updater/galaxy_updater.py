@@ -22,7 +22,7 @@ class git_tags(object):
             output = self._get_tags_from_file(src)
         else:
             raise UnsupportedSrcError(
-                  "Unsupported source type: {}".format(src))
+                  "Unsupported source type: {0}".format(src))
 
         self.tags = re.findall(r'refs/tags/([\d+.]+)$', output, re.MULTILINE)
 
@@ -47,7 +47,7 @@ class updater(object):
     def find_latest_versions(self):
         output = []
         for req in self.reqs:
-            assert req['src'], "Error, src key not found in {}".format(req) 
+            assert req['src'], "Error, src key not found in {0}".format(req) 
             src = req['src']
             short_name = src.split('/')[-1].split('.')[0]
             version = req.get('version')
@@ -56,7 +56,7 @@ class updater(object):
             if ( (not version) or
                  (LooseVersion(version) < LooseVersion(g.latest())) ):
                 # If version is not set, suggest the latest version
-                output.append("{}: {} -> {}".format( 
+                output.append("{0}: {1} -> {2}".format( 
                                short_name, version, g.latest()))
         return output
 

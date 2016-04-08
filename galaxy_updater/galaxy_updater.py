@@ -60,10 +60,17 @@ class updater(object):
         self.requirement_file = requirement_file
         with open(requirement_file, 'r') as f:
             self.reqs = ruamel.yaml.load(f, ruamel.yaml.RoundTripLoader)
-        
+
+    def _pattern_in_src(self, src, pattern):
+        for p in pattern:
+            if p in src:
+                return True
+        return False
 
     def find_latest_versions(self, replace_inline = False, 
-                             update_unversioned = True):
+                             update_unversioned = True,
+                             include_pattern = [],
+                             exclude_pattern = []):
         """ 
           Return a list of available updates
 
@@ -81,6 +88,11 @@ class updater(object):
             if not g.latest():
                 continue
             if not version and not update_unversioned:
+                continue
+            if (include_pattern and 
+                not self._pattern_in_src(src, include_pattern)):
+                continue
+            if exclude_pattern and self._pattern_in_src(src, exclude_pattern):
                 continue
 
             if ( (not version) or
@@ -105,6 +117,16 @@ def main():
                         action='store_true')
     parser.add_argument('--yolo', help="Ignore unversioned roles", 
                         action='store_true')
+    parser.add_argument('--include', 
+                        help="Only include roles src matching pattern", 
+                        dest='include_pattern',
+                        default=[],
+                        action='append')
+    parser.add_argument('--exclude', 
+                        help="Only include roles src matching pattern", 
+                        dest='exclude_pattern',
+                        default=[],
+                        action='append')
     parser.add_argument('--version',
                         action='version',
                         version='galaxy-updater {0}'.format(__version__))
@@ -116,7 +138,9 @@ def main():
         sys.exit(1)
     u = updater(args.requirement_file)
     for line in u.find_latest_versions(replace_inline = args.inline,
-                                       update_unversioned = not args.yolo):
+                                       update_unversioned = not args.yolo,
+                                       include_pattern = args.include_pattern,
+                                       exclude_pattern = args.exclude_pattern):
         if args.yolo and "None" in line:
             continue
         print(line)

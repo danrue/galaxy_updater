@@ -7,6 +7,7 @@ import ruamel.yaml
 import subprocess
 import sys
 from distutils.version import LooseVersion
+from __init__ import __version__
 
 class UnsupportedSrcError(Exception):
     def __init__(self, value = "Unsupported src Error"):
@@ -59,7 +60,6 @@ class updater(object):
         self.requirement_file = requirement_file
         with open(requirement_file, 'r') as f:
             self.reqs = ruamel.yaml.load(f, ruamel.yaml.RoundTripLoader)
-        #import pdb; pdb.set_trace()
         
 
     def find_latest_versions(self, replace_inline = False, 
@@ -101,10 +101,13 @@ class updater(object):
 def main():
     parser = argparse.ArgumentParser(
              description='Update ansible-galaxy requirements file')
-    parser.add_argument('--inline', help="Edit requirements file in-place", 
+    parser.add_argument('-i', '--inline', help="Edit requirements file in-place", 
                         action='store_true')
-    parser.add_argument('--yolo', help="Ignore unversioned roles", 
+    parser.add_argument('-y', '--yolo', help="Ignore unversioned roles", 
                         action='store_true')
+    parser.add_argument('-V', '--version',
+                        action='version',
+                        version='galaxy-updater {0}'.format(__version__))
     parser.add_argument('requirement_file', help="ansible-galaxy yaml file")
     args = parser.parse_args()
 

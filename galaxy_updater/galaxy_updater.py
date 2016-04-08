@@ -101,11 +101,11 @@ class updater(object):
 def main():
     parser = argparse.ArgumentParser(
              description='Update ansible-galaxy requirements file')
-    parser.add_argument('-i', '--inline', help="Edit requirements file in-place", 
+    parser.add_argument('--inline', help="Edit requirements file in-place", 
                         action='store_true')
-    parser.add_argument('-y', '--yolo', help="Ignore unversioned roles", 
+    parser.add_argument('--yolo', help="Ignore unversioned roles", 
                         action='store_true')
-    parser.add_argument('-V', '--version',
+    parser.add_argument('--version',
                         action='version',
                         version='galaxy-updater {0}'.format(__version__))
     parser.add_argument('requirement_file', help="ansible-galaxy yaml file")

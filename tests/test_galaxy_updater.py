@@ -34,7 +34,6 @@ class TestGalaxy_updater(object):
         output = u.find_latest_versions(replace_inline = inline,
                                         update_unversioned = not yolo)
 
-        print(output)
         assert len(output) == 4
         assert (hashlib.md5(open(testfile, 'rb').read()).hexdigest() == 
                 "82111e45e03c488120afa64dc890bf3f")

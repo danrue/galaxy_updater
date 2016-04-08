@@ -80,15 +80,16 @@ class updater(object):
 
             if not g.latest():
                 continue
+            if not version and not update_unversioned:
+                continue
 
             if ( (not version) or
                  (LooseVersion(version) < LooseVersion(g.latest())) ):
                 # If version is not set, suggest the latest version
-                output.append("{0}: {1} -> {2}".format( 
-                               short_name, version, g.latest()))
-                if (replace_inline and
-                   (update_unversioned or version)):
-                    self.reqs[i]["version"] = g.latest()
+              output.append("{0}: {1} -> {2}".format( 
+                             short_name, version, g.latest()))
+              if replace_inline:
+                  self.reqs[i]["version"] = g.latest()
 
         if replace_inline:
             # Modify existing file

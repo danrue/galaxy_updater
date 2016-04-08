@@ -6,3 +6,7 @@ test:
 release_patch:
 	bumpversion patch
 	git push --tags
+
+release_minor:
+	bumpversion minor
+	git push --tags

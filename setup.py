@@ -14,7 +14,7 @@ with open('HISTORY.rst') as history_file:
 
 setup(
     name='galaxy-updater',
-    version='0.1.3',
+    version='0.2.0',
     description=('Retrieve the latest versions for all of your '
                  'ansible-galaxy role dependencies.'),
     long_description=readme + '\n\n' + history,
@@ -27,7 +27,7 @@ setup(
     package_dir={'galaxy_updater':
                  'galaxy_updater'},
     include_package_data=True,
-    install_requires=['pyyaml', 'future'],
+    install_requires=['ruamel.yaml', 'future'],
     license="BSD",
     keywords='ansible-galaxy ansible galaxy requirements.yml',
     classifiers=[

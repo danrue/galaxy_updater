@@ -21,7 +21,11 @@ class TestGalaxy_updater(object):
         """ Normal Run - 5 changes """
         u = galaxy_updater.updater("tests/test_files/1_requirements.yml")
         output = u.find_latest_versions()
-        assert len(output) == 5
+        assert output == ['ansible-role-mysql: 0.0.1 -> 1.9.1', 
+                          'ansible-role-apache: 0.0.1 -> 1.5.0', 
+                          'ansible-role-jenkins: 0.0.1 -> 1.2.8', 
+                          'ansible-role-php: 0.0.1 -> 1.7.3', 
+                          'ansible-role-1-tag: 0.0.1 -> 1.0.0']
 
     def test_001_inline(self):
         """ Test 4 inline changes """
@@ -64,6 +68,32 @@ class TestGalaxy_updater(object):
         u = galaxy_updater.updater("tests/test_files/3_requirements.yml")
         output = u.find_latest_versions(replace_inline=True)
         assert len(output) == 0
+
+    def test_004_includes(self):
+        includes = ['mysql', 'apache']
+        u = galaxy_updater.updater("tests/test_files/1_requirements.yml")
+        output = u.find_latest_versions(include_pattern = includes)
+        assert output == ['ansible-role-mysql: 0.0.1 -> 1.9.1', 
+                          'ansible-role-apache: 0.0.1 -> 1.5.0']
+
+    def test_005_excludes(self):
+        excludes = ['mysql', 'apache']
+        u = galaxy_updater.updater("tests/test_files/1_requirements.yml")
+        output = u.find_latest_versions(exclude_pattern = excludes)
+        assert output == ['ansible-role-jenkins: 0.0.1 -> 1.2.8', 
+                          'ansible-role-php: 0.0.1 -> 1.7.3', 
+                          'ansible-role-1-tag: 0.0.1 -> 1.0.0']
+
+    def test_004_includes_excludes(self):
+        includes = ['ansible', 'role', 'php']
+        excludes = ['mysql', 'apache']
+        u = galaxy_updater.updater("tests/test_files/1_requirements.yml")
+        output = u.find_latest_versions(include_pattern = includes,
+                                        exclude_pattern = excludes)
+        assert output == ['ansible-role-jenkins: 0.0.1 -> 1.2.8',
+                          'ansible-role-php: 0.0.1 -> 1.7.3',
+                          'ansible-role-1-tag: 0.0.1 -> 1.0.0']
+
 
 if __name__ == '__main__':
     import sys

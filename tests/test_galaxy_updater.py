@@ -56,6 +56,11 @@ class TestGalaxy_updater(object):
         shutil.copyfile(testfile_bak, testfile)
         os.remove(testfile_bak)
 
+    def test_003_noupdates(self):
+        u = galaxy_updater.updater("tests/test_files/3_requirements.yml")
+        output = u.find_latest_versions(replace_inline=Trueinline)
+        assert len(output) == 0
+
 if __name__ == '__main__':
     import sys
     sys.exit(unittest.main())

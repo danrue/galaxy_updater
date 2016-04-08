@@ -27,7 +27,7 @@ setup(
     package_dir={'galaxy_updater':
                  'galaxy_updater'},
     include_package_data=True,
-    install_requires=['pyyaml', 'future'],
+    install_requires=['ruamel.yaml', 'future'],
     license="BSD",
     keywords='ansible-galaxy ansible galaxy requirements.yml',
     classifiers=[

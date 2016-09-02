@@ -27,7 +27,10 @@ setup(
     package_dir={'galaxy_updater':
                  'galaxy_updater'},
     include_package_data=True,
-    install_requires=['ruamel.yaml', 'future', 'ansible'],
+    install_requires=[
+                      'ruamel.yaml==0.11.15', # Last py26 version
+                      'future',
+                      'requests'],
     license="BSD",
     keywords='ansible-galaxy ansible galaxy requirements.yml',
     classifiers=[

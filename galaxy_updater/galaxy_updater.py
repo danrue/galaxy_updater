@@ -2,6 +2,7 @@ from __future__ import print_function
 import argparse
 import os
 import re
+import requests
 import subprocess
 import sys
 
@@ -9,11 +10,6 @@ from distutils.version import LooseVersion
 import ruamel.yaml
 from builtins import object, str
 from __init__ import __version__
-
-from collections import namedtuple
-import ansible.constants as C
-from ansible.galaxy import Galaxy
-from ansible.galaxy.api import GalaxyAPI
 
 class UnsupportedSrcError(Exception):
     def __init__(self, value="Unsupported src Error"):
@@ -66,10 +62,6 @@ class Updater(object):
         self.requirement_file = requirement_file
         with open(requirement_file, 'r') as f:
             self.reqs = ruamel.yaml.load(f, ruamel.yaml.RoundTripLoader)
-        options = namedtuple('fake_galaxy_opts', ['ignore_certs', 'api_server'])
-        options.ignore_certs = True
-        options.api_server = C.GALAXY_SERVER
-        self.galaxy_api = GalaxyAPI(Galaxy( options ))
 
     def _pattern_in_src(self, src, pattern):
         for pat in pattern:
@@ -78,10 +70,17 @@ class Updater(object):
         return False
 
     def _src_from_galaxy(self, src):
-        role_data = self.galaxy_api.lookup_role_by_name(src, False)
-        if not role_data:
-            return src
-        return "https://github.com/%s/%s" % (role_data['github_user'], role_data['github_repo'])
+
+        parts = src.split(".")
+        user_name = ".".join(parts[0:-1])
+        role_name = parts[-1]
+
+        url = 'https://galaxy.ansible.com/api/v1/roles/?owner__username={0}&name={1}'.format(user_name,role_name)
+        data = requests.get(url).json()
+        github_user = data['results'][0]['github_user']
+        github_repo = data['results'][0]['github_repo']
+
+        return "https://github.com/{0}/{1}".format(github_user, github_repo)
 
     def find_latest_versions(self, replace_inline=False,
                              update_unversioned=True,
@@ -99,8 +98,10 @@ class Updater(object):
             src = req['src']
             # If src looks like author.role, ask Galaxy about git source
             if re.match(r'[\w\-_\.]+\.[\w\-_\.]+', src):
+                short_name = src
                 src = self._src_from_galaxy(src)
-            short_name = src.split('/')[-1].split('.')[0]
+            else:
+                short_name = src.split('/')[-1].split('.')[0]
             version = req.get('version')
             g = GitTags(src)
 

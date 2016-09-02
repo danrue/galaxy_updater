@@ -27,7 +27,11 @@ setup(
     package_dir={'galaxy_updater':
                  'galaxy_updater'},
     include_package_data=True,
-    install_requires=['ruamel.yaml', 'future', 'ansible'],
+    install_requires=[
+                      'ruamel.yaml',
+                      'future',
+                      'ansible>=2',
+                     ],
     license="BSD",
     keywords='ansible-galaxy ansible galaxy requirements.yml',
     classifiers=[
@@ -38,13 +42,12 @@ setup(
         "Programming Language :: Python :: 2",
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
     ],
     test_suite='tests',
-    tests_require=['pytest'],
+    tests_require=[
+                   'pytest',
+                   'ansible>=2.0',
+                  ],
 
     entry_points={
         'console_scripts': [

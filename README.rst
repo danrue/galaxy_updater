@@ -31,6 +31,9 @@ Given an example ansible-galaxy role file::
     - src: https://github.com/geerlingguy/ansible-role-php.git 
       name: ansible-role-php
       version: 1.5.0
+    - src: yatesr.timezone
+    - src: carlosbuenosvinos.ansistrano-deploy
+      version: 1.4.0
 
 Find and print the latest version of each role listed in an ansible-galaxy role
 file::
@@ -39,6 +42,8 @@ file::
     ansible-role-mysql: 1.9.0 -> 1.9.1
     ansible-role-apache: None -> 1.5.0
     ansible-role-php: 1.5.0 -> 1.7.3
+    yatesr.timezone: None -> 1.0.0
+    carlosbuenosvinos.ansistrano-deploy: 1.4.0 -> 1.10.0
 
 Update the sample_requirements.yml file in place::
 
@@ -46,10 +51,12 @@ Update the sample_requirements.yml file in place::
     ansible-role-mysql: 1.9.0 -> 1.9.1
     ansible-role-apache: None -> 1.5.0
     ansible-role-php: 1.5.0 -> 1.7.3
+    yatesr.timezone: None -> 1.0.0
+    carlosbuenosvinos.ansistrano-deploy: 1.4.0 -> 1.10.0
 
 Use --yolo to leave unpinned dependencies unpinned::
 
-    $ galaxy-updater --inline sample_requirements.yml 
+    $ galaxy-updater --yolo sample_requirements.yml 
     ansible-role-mysql: 1.9.0 -> 1.9.1
     ansible-role-php: 1.5.0 -> 1.7.3
-
+    carlosbuenosvinos.ansistrano-deploy: 1.4.0 -> 1.10.0

@@ -30,7 +30,8 @@ setup(
     install_requires=[
                       'ruamel.yaml==0.11.15', # Last py26 version
                       'future',
-                      'requests'],
+                      'requests'
+                     ],
     license="BSD",
     keywords='ansible-galaxy ansible galaxy requirements.yml',
     classifiers=[

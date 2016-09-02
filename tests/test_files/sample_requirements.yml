@@ -10,3 +10,7 @@
 - src: https://github.com/geerlingguy/ansible-role-php.git 
   name: ansible-role-php
   version: 1.5.0
+- src: yatesr.timezone
+- src: carlosbuenosvinos.ansistrano-deploy
+  version: 1.4.0
+

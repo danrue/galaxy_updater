@@ -2,10 +2,14 @@
 History
 =======
 
-0.3.0 (2016-09-01)
+0.4.0 (2016-09-01)
 ------------------
 
 * Add support for galaxy style roles (user.rolename)
+
+0.3.0 (2016-04-08)
+------------------
+* Add support for --include and --exclude options
 
 0.2.0 (2016-04-07)
 ------------------

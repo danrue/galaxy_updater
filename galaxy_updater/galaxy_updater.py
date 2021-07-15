@@ -9,7 +9,7 @@ import sys
 from distutils.version import LooseVersion
 import ruamel.yaml
 from builtins import object, str
-from __init__ import __version__
+from . import __version__
 
 class UnsupportedSrcError(Exception):
     def __init__(self, value="Unsupported src Error"):
